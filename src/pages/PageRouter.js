@@ -1,27 +1,28 @@
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import {connect} from 'react-redux';
 import MainPage from './MainPage';
 import SendMessagePage from './SendMessagePage';
-import AllMessagePage from './AllMessagePage';
 
 
-const intPageRouter=()=>{
+const IntPageRouter=(props)=>{
     return(
         <div>
             <Routes>
                 <Route path='/' element={<MainPage />}/>
-                <Route path='/sendMessage' element={<SendMessagePage />}/>
-                <Route path='/showAllMessage' element={<AllMessagePage />}/>
+                {props.isLogin&&<Route path='/sendMessage' element={<SendMessagePage />}/>}
+                <Route path="*" element={<Navigate to ={'/'}/>}/>
             </Routes>
         </div>
     )
 }
 
 const mapStateToProps=(state)=>{
-   return {}
+   return {
+    isLogin:state.messages.isLogin
+   }
 }
 
-const PageRouter=connect(mapStateToProps)(intPageRouter);
+const PageRouter=connect(mapStateToProps)(IntPageRouter);
 
 export default PageRouter;

@@ -2,8 +2,10 @@ import React from 'react';
 import {Form, Button, Container, Card, Modal} from 'react-bootstrap';
 import {useNavigate} from 'react-router-dom';
 import { useState} from "react";
+import {connect} from 'react-redux';
+import {userLogin} from '../store/explainForReducer';
 
-const MainPage=()=>{
+const IntMainPage=(props)=>{
 
     const navigate=useNavigate();
     const [nameInput, setNameInput]=useState('');
@@ -18,6 +20,7 @@ const MainPage=()=>{
         setModal('Your name cannot be an empty string!');
         setShow(true);
       }else{
+        props.dispatch(userLogin(nameInput, true))
         navigate('/sendMessage');
 
       }
@@ -28,7 +31,7 @@ const MainPage=()=>{
         <div> 
             <Container className="d-flex justify-content-center align-items-center" style={{height:window.innerHeight-54}}>          
           <Card style={{width:600}} className='p-5'>
-            <h2 className="m-auto">Authorization</h2>
+            <h2 className="m-auto">Login</h2>
             <Form className="d-flex flex-column">
               <Form.Control className="mt-3" placeholder={'Enter your name'}  name='nameReg' 
                  value={nameInput}  onChange={(event)=>setNameInput(event.target.value)}/>
@@ -48,5 +51,11 @@ const MainPage=()=>{
         </div>
     )
 }
+
+const mapStateToProps=(state)=>{
+  return { }
+}
+
+const MainPage=connect(mapStateToProps)(IntMainPage);
 
 export default MainPage;

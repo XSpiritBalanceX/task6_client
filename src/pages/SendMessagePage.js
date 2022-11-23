@@ -1,8 +1,10 @@
 import React from 'react';
 import { useState} from "react";
 import {Form, Button, Container, Card, Modal, FloatingLabel } from 'react-bootstrap';
+import OneMessage from '../components/OneMessage';
+import {connect} from 'react-redux';
 
-const SendMessagePage=()=>{
+const IntSendMessagePage=(props)=>{
 
     const [forWhom, setForWhom]=useState('');
     const [show, setShow] = useState(false);
@@ -14,12 +16,19 @@ const SendMessagePage=()=>{
     }
 
     return (
-        <div>
+      <div style={{display:'flex', flexDirection:'row', margin:'2% 2% 0 2%'}}>
+      <div style={{width:'40%'}}>
+        <div style={{display:'flex', flexDirection:'column'}}>
+          <OneMessage />
+        </div>
+      </div>
+        <div style={{marginLeft:'2%', marginTop:'-3%', width:'50%'}}>
              <Container className="d-flex justify-content-center align-items-center" style={{height:window.innerHeight-54}}>          
-          <Card style={{width:600}} className='p-5'>
+          <Card style={{width:600}} className='p-5 '>
             <h2 className="m-auto">New message</h2>
+            <Form.Control className="mt-4"  defaultValue={props.nameSender} disabled={true} name='nameReg' />
             <Form className="d-flex flex-column">
-             <Form.Control className="mt-4" type="text" list="country" placeholder={'For whom'} 
+             <Form.Control className="mt-2" type="text" list="country" placeholder={'For whom'} 
                  value={forWhom} onChange={(event)=>setForWhom(event.target.value)}></Form.Control>
              <datalist id="country">
 	           <option>Беларусь</option>
@@ -48,7 +57,16 @@ const SendMessagePage=()=>{
         </Modal.Footer>
       </Modal>
         </div>
+        </div>
     )
 }
+
+const mapStateToProps=(state)=>{
+  return {
+    nameSender:state.messages.userLogin
+  }
+}
+
+const SendMessagePage=connect(mapStateToProps)(IntSendMessagePage);
 
 export default SendMessagePage;
