@@ -25,7 +25,6 @@ const IntPageLinks=(props)=>{
 }
 
 const mapStateToProps=(state)=>{
-  console.log(state.messages.isLogin)
   return {
     isLogin:state.messages.isLogin
   }

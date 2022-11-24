@@ -1,7 +1,7 @@
 import React from 'react';
 import {Form, Button, Container, Card, Modal} from 'react-bootstrap';
 import {useNavigate} from 'react-router-dom';
-import { useState} from "react";
+import { useState, useEffect} from "react";
 import {connect} from 'react-redux';
 import {userLogin} from '../store/explainForReducer';
 
@@ -12,9 +12,7 @@ const IntMainPage=(props)=>{
     const [show, setShow] = useState(false);
     const [modalInfo, setModal]=useState('');
     const handleClose = () => setShow(false);
-
-
-
+  
     const click=()=>{
       if(nameInput===''){
         setModal('Your name cannot be an empty string!');
@@ -22,7 +20,6 @@ const IntMainPage=(props)=>{
       }else{
         props.dispatch(userLogin(nameInput, true))
         navigate('/sendMessage');
-
       }
     }
    

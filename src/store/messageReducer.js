@@ -1,8 +1,10 @@
-import {user_Login} from './explainForReducer';
+import {user_Login, load_AllMessage} from './explainForReducer';
 
 const initialState={
    userLogin:'',
-   isLogin:false
+   isLogin:false,
+   allMessage:[],
+   receivers:[]
 }
 
 function messageReducer (state=initialState, action){
@@ -11,6 +13,15 @@ function messageReducer (state=initialState, action){
             let newState={...state};
             newState.userLogin=action.loginUser;
             newState.isLogin=action.isLogin;
+            fetch('http://localhost:5000/api/message/?name='+newState.userLogin)
+            .then(response=>response.json())
+            .then(data=>newState.receivers=data)
+            return newState;
+        }
+
+        case load_AllMessage:{
+           let newState={...state}; 
+            newState.allMessage=action.data.message;        
             return newState;
         }
 
