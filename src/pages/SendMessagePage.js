@@ -69,7 +69,7 @@ const IntSendMessagePage=(props)=>{
       </div>
     </div>
       <div style={{marginLeft:'2%', marginTop:'-3%', width:'50%'}}>
-           <Container className="d-flex justify-content-center align-items-center" style={{height:window.innerHeight-120}}>          
+           <Container className="d-flex justify-content-center align-items-center" style={{height:window.innerHeight-100}}>          
         <Card style={{width:600}} className='p-5 '>
           <h2 className="m-auto">New message</h2>
           <Form.Control className="mt-4"  defaultValue={props.nameSender} disabled={true} name='nameReg' />
