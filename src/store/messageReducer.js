@@ -15,13 +15,17 @@ function messageReducer (state=initialState, action){
             newState.isLogin=action.isLogin;
             fetch('http://localhost:5000/api/message/?name='+newState.userLogin)
             .then(response=>response.json())
-            .then(data=>newState.receivers=data)
+            .then(data=>newState.receivers=data);
             return newState;
         }
 
         case load_AllMessage:{
            let newState={...state}; 
-            newState.allMessage=action.data.message;        
+            newState.allMessage=action.data.message; 
+            let uniqArrReceiv=newState.receivers.receiver.filter((el, ind, arr)=>{
+                return arr.indexOf(el)===ind
+            });
+            newState.receivers.receiver=uniqArrReceiv;    
             return newState;
         }
 

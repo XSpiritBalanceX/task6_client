@@ -16,20 +16,22 @@ const IntSendMessagePage=(props)=>{
     const [modalInfo, setModal]=useState('');
     const handleClose = () => setShow(false);
     const [isLoad, setIsLoad]=useState(false);
- 
+
+    const {nameSender,dispatch }=props;
 
      useEffect(() => {
       const id = setInterval(() => {
-        fetch('http://localhost:5000/api/message/getmes?name='+props.nameSender)
+        fetch('http://localhost:5000/api/message/getmes?name='+nameSender)
         .then(response=>response.json())
-        .then(data=>props.dispatch(loadAllMessage(data))) 
+        .then(data=>dispatch(loadAllMessage(data)))
         setIsLoad(true);       
       }, 5000);
   
       return () => {
         clearInterval(id);
       };
-    }, []); 
+      
+    }, [dispatch, nameSender]); 
     
    
     const sendMessage=()=>{
@@ -52,7 +54,6 @@ const IntSendMessagePage=(props)=>{
       setMessage('');
     }
 
- 
   return (
       <div >
         {isLoad?<div><div style={{display:'flex',height:'40%', flexDirection:'row',  margin:'2% 2% 0 0'}}>        
@@ -73,9 +74,9 @@ const IntSendMessagePage=(props)=>{
           <h2 className="m-auto">New message</h2>
           <Form.Control className="mt-4"  defaultValue={props.nameSender} disabled={true} name='nameReg' />
           <Form className="d-flex flex-column">
-           <Form.Control className="mt-2" type="text" list="country" placeholder={'For whom'} 
+           <Form.Control className="mt-2" type="text" list="receivers" placeholder={'For whom'} 
                value={forWhom} onChange={(event)=>setForWhom(event.target.value)}></Form.Control>
-           <datalist id="country">
+           <datalist id="receivers">
            { props.receiver.receiver? props.receiver.receiver.map((el, ind)=>{
               return <option key={ind}>{el}</option>
             }):null }
