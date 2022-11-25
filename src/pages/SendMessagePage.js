@@ -53,7 +53,7 @@ const IntSendMessagePage=(props)=>{
       setTopic('');
       setMessage('');
     }
-
+console.log(props.dataMessage)
   return (
       <div >
         {isLoad?<div><div style={{display:'flex',height:'40%', flexDirection:'row',  margin:'2% 2% 0 0'}}>        
