@@ -21,7 +21,7 @@ const IntSendMessagePage=(props)=>{
 
      useEffect(() => {
       const id = setInterval(() => {
-        fetch('http://localhost:5000/api/message/getmes?name='+nameSender)
+        fetch('https://task6server-production.up.railway.app/api/message/getmes?name='+nameSender)
         .then(response=>response.json())
         .then(data=>dispatch(loadAllMessage(data)))
         setIsLoad(true);       
@@ -40,7 +40,7 @@ const IntSendMessagePage=(props)=>{
       sendM.nameReceivers=forWhom;
       sendM.topic=topic;
       sendM.message=message;
-      fetch('http://localhost:5000/api/users/sendMessage', {method:'POST',
+      fetch('https://task6server-production.up.railway.app/api/users/sendMessage', {method:'POST',
         headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'

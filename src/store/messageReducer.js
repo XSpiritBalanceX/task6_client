@@ -13,7 +13,7 @@ function messageReducer (state=initialState, action){
             let newState={...state};
             newState.userLogin=action.loginUser;
             newState.isLogin=action.isLogin;
-            fetch('http://localhost:5000/api/message/?name='+newState.userLogin)
+            fetch('https://task6server-production.up.railway.app/api/message/?name='+newState.userLogin)
             .then(response=>response.json())
             .then(data=>newState.receivers=data);
             return newState;
